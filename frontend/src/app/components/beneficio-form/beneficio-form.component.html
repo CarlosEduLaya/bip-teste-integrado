@@ -1,0 +1,58 @@
+<div class="page-header">
+  <h2>{{ isEdit ? 'Editar Benefício' : 'Novo Benefício' }}</h2>
+</div>
+
+<div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+<p *ngIf="loading" style="text-align:center;padding:32px;color:#888">Carregando...</p>
+
+<div class="card" *ngIf="!loading">
+  <form (ngSubmit)="save()" #f="ngForm">
+    <div class="form-group">
+      <label for="nome">Nome *</label>
+      <input id="nome" name="nome" [(ngModel)]="beneficio.nome" required maxlength="100"
+             placeholder="Nome do benefício" />
+    </div>
+
+    <div class="form-group">
+      <label for="descricao">Descrição</label>
+      <input id="descricao" name="descricao" [(ngModel)]="beneficio.descricao"
+             maxlength="255" placeholder="Descrição opcional" />
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="valor">Valor (R$) *</label>
+        <div class="input-prefix-wrapper">
+          <span class="input-prefix">R$</span>
+          <input
+            id="valor"
+            name="valor"
+            [(ngModel)]="valorMascarado"
+            (ngModelChange)="onValorChange($event)"
+            mask="separator.2"
+            [dropSpecialCharacters]="false"
+            thousandSeparator="."
+            decimalMarker=","
+            required
+            placeholder="0,00"
+          />
+        </div>
+      </div>
+
+      <div class="form-group" *ngIf="isEdit">
+        <label for="ativo">Status</label>
+        <select id="ativo" name="ativo" [(ngModel)]="beneficio.ativo">
+          <option [ngValue]="true">Ativo</option>
+          <option [ngValue]="false">Inativo</option>
+        </select>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:12px;margin-top:8px">
+      <button type="submit" class="btn btn-primary" [disabled]="f.invalid || saving">
+        {{ saving ? 'Salvando...' : (isEdit ? 'Salvar' : 'Criar') }}
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="cancel()">Cancelar</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,49 @@
+<div class="page-header">
+  <h2>Benefícios</h2>
+  <a class="btn btn-primary" routerLink="/beneficios/new">+ Novo</a>
+</div>
+
+<div *ngIf="successMsg" class="alert alert-success">{{ successMsg }}</div>
+<div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+<div class="card" *ngIf="!loading; else spinner">
+  <table *ngIf="beneficios.length; else empty">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Valor (R$)</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let b of beneficios">
+        <td>{{ b.id }}</td>
+        <td>{{ b.nome }}</td>
+        <td>{{ b.descricao || '—' }}</td>
+        <td>{{ b.valor | number:'1.2-2' }}</td>
+        <td>
+          <span class="badge" [class.badge-success]="b.ativo" [class.badge-danger]="!b.ativo">
+            {{ b.ativo ? 'Ativo' : 'Inativo' }}
+          </span>
+        </td>
+        <td class="actions">
+          <a class="btn btn-secondary btn-sm" [routerLink]="['/beneficios', b.id, 'edit']">Editar</a>
+          <button class="btn btn-danger btn-sm" (click)="deactivate(b)" [disabled]="!b.ativo">
+            Desativar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #empty>
+    <p style="color:#888; text-align:center; padding:32px">Nenhum benefício cadastrado.</p>
+  </ng-template>
+</div>
+
+<ng-template #spinner>
+  <p style="text-align:center; padding:32px; color:#888">Carregando...</p>
+</ng-template>
