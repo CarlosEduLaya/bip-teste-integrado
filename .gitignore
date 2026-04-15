@@ -1,0 +1,33 @@
+# ─── Maven ────────────────────────────────────────────────────────────────────
+target/
+*.class
+*.jar
+*.war
+*.ear
+
+# ─── Angular / Node ───────────────────────────────────────────────────────────
+node_modules/
+dist/
+.angular/
+frontend/.angular/
+frontend/dist/
+
+# ─── IDEs ─────────────────────────────────────────────────────────────────────
+.idea/
+*.iml
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# ─── OS ───────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ─── Logs / temporários ───────────────────────────────────────────────────────
+*.log
+*.tmp
+
+# ─── Claude Code (pasta de memória local, não entra no repo) ──────────────────
+.claude/
