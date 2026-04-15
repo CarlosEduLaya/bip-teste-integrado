@@ -29,5 +29,3 @@ Thumbs.db
 *.log
 *.tmp
 
-# ─── Claude Code (pasta de memória local, não entra no repo) ──────────────────
-.claude/
