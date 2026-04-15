@@ -20,7 +20,7 @@ Solução fullstack para o desafio técnico, cobrindo banco de dados, módulo EJ
 
 O método `transfer` original tinha três problemas sérios:
 
-- Não verificava se o saldo era suficiente antes de debitar — dava pra deixar valor negativo
+- Não verificava se o saldo era suficiente antes de debitar, dava pra deixar valor negativo
 - Sem nenhum tipo de locking, em ambiente concorrente duas threads podiam ler o mesmo saldo e as duas aprovar a transferência (lost update)
 - Sem validações de entrada, então um `null` ou valor negativo passava direto
 
