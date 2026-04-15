@@ -15,7 +15,7 @@
         <select id="fromId" name="fromId" [(ngModel)]="fromId" required>
           <option [ngValue]="null" disabled>Selecione...</option>
           <option *ngFor="let b of beneficios" [ngValue]="b.id">
-            {{ b.nome }} — R$ {{ b.valor | number:'1.2-2':'pt-BR' }}
+            {{ b.nome }} — R$ {{ b.valor | number:'1.2-2' }}
           </option>
         </select>
       </div>
@@ -26,7 +26,7 @@
           <option [ngValue]="null" disabled>Selecione...</option>
           <option *ngFor="let b of beneficios" [ngValue]="b.id"
                   [disabled]="b.id === fromId">
-            {{ b.nome }} — R$ {{ b.valor | number:'1.2-2':'pt-BR' }}
+            {{ b.nome }} — R$ {{ b.valor | number:'1.2-2' }}
           </option>
         </select>
       </div>
@@ -58,9 +58,12 @@
   </form>
 </div>
 
-<!-- Tabela de saldos atuais -->
+<!-- Tabela de saldos — sempre visível, atualiza após cada transferência -->
 <div class="card" *ngIf="beneficios.length">
-  <h3 style="margin-bottom:16px;font-size:1rem;color:#555">Saldos atuais</h3>
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+    <h3 style="font-size:1rem;color:#555;margin:0">Saldos atuais</h3>
+    <span *ngIf="recarregando" style="font-size:0.8rem;color:#888">atualizando...</span>
+  </div>
   <table>
     <thead>
       <tr><th>#</th><th>Nome</th><th>Saldo (R$)</th></tr>
@@ -69,7 +72,7 @@
       <tr *ngFor="let b of beneficios">
         <td>{{ b.id }}</td>
         <td>{{ b.nome }}</td>
-        <td>{{ b.valor | number:'1.2-2':'pt-BR' }}</td>
+        <td>{{ b.valor | number:'1.2-2' }}</td>
       </tr>
     </tbody>
   </table>

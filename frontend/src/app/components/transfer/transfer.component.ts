@@ -17,12 +17,11 @@ export class TransferComponent implements OnInit {
   fromId: number | null = null;
   toId: number | null = null;
 
-  /** Valor exibido com máscara, ex: "1.500,00" */
   amountMascarado = '';
-  /** Valor numérico real enviado à API */
   amountNumerico = 0;
 
   loading = false;
+  recarregando = false;
   submitting = false;
   error = '';
   success = '';
@@ -30,14 +29,24 @@ export class TransferComponent implements OnInit {
   constructor(private service: BeneficioService) {}
 
   ngOnInit(): void {
-    this.carregarBeneficios();
+    this.carregarBeneficios(true);
   }
 
-  carregarBeneficios(): void {
-    this.loading = true;
+  carregarBeneficios(inicial = false): void {
+    if (inicial) this.loading = true;
+    else this.recarregando = true;
+
     this.service.findAll(true).subscribe({
-      next: data => { this.beneficios = data; this.loading = false; },
-      error: () => { this.error = 'Erro ao carregar benefícios.'; this.loading = false; }
+      next: data => {
+        this.beneficios = data;
+        this.loading = false;
+        this.recarregando = false;
+      },
+      error: () => {
+        this.error = 'Erro ao carregar benefícios.';
+        this.loading = false;
+        this.recarregando = false;
+      }
     });
   }
 
@@ -60,6 +69,7 @@ export class TransferComponent implements OnInit {
           this.amountMascarado = '';
           this.amountNumerico = 0;
           this.submitting = false;
+          // recarrega sem esconder a tabela
           this.carregarBeneficios();
         },
         error: err => {
