@@ -38,8 +38,6 @@ class BeneficioControllerTest {
         return b;
     }
 
-    // ── GET /api/v1/beneficios ────────────────────────────────────────────────
-
     @Test
     void list_deveRetornar200_comListaDeBeneficios() throws Exception {
         when(service.findAll()).thenReturn(List.of(fakeBeneficio()));
@@ -48,8 +46,6 @@ class BeneficioControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].nome").value("Beneficio A"));
     }
-
-    // ── GET /api/v1/beneficios/{id} ───────────────────────────────────────────
 
     @Test
     void getById_deveRetornar200_quandoExistir() throws Exception {
@@ -67,8 +63,6 @@ class BeneficioControllerTest {
         mockMvc.perform(get("/api/v1/beneficios/99"))
                 .andExpect(status().isNotFound());
     }
-
-    // ── POST /api/v1/beneficios ───────────────────────────────────────────────
 
     @Test
     void create_deveRetornar201_comBeneficioCriado() throws Exception {
@@ -91,8 +85,6 @@ class BeneficioControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
-    // ── DELETE /api/v1/beneficios/{id} ────────────────────────────────────────
-
     @Test
     void deactivate_deveRetornar204() throws Exception {
         doNothing().when(service).deactivate(1L);
@@ -100,8 +92,6 @@ class BeneficioControllerTest {
         mockMvc.perform(delete("/api/v1/beneficios/1"))
                 .andExpect(status().isNoContent());
     }
-
-    // ── POST /api/v1/beneficios/transfer ─────────────────────────────────────
 
     @Test
     void transfer_deveRetornar204_quandoValido() throws Exception {

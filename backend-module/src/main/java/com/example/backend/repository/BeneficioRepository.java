@@ -16,10 +16,6 @@ public interface BeneficioRepository extends JpaRepository<Beneficio, Long> {
 
     List<Beneficio> findByAtivo(Boolean ativo);
 
-    /**
-     * Busca um benefício com PESSIMISTIC_WRITE lock — mesma estratégia aplicada no EJB corrigido.
-     * Garante serialização de transferências concorrentes ao mesmo registro.
-     */
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("SELECT b FROM Beneficio b WHERE b.id = :id")
     Optional<Beneficio> findByIdWithLock(@Param("id") Long id);

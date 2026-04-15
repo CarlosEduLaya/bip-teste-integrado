@@ -38,8 +38,6 @@ class BeneficioServiceTest {
         destino.setAtivo(true);
     }
 
-    // ── findById ─────────────────────────────────────────────────────────────
-
     @Test
     void findById_deveRetornarBeneficio_quandoExistir() {
         when(repository.findById(1L)).thenReturn(Optional.of(origem));
@@ -52,8 +50,6 @@ class BeneficioServiceTest {
         assertThrows(BeneficioNotFoundException.class, () -> service.findById(99L));
     }
 
-    // ── create ───────────────────────────────────────────────────────────────
-
     @Test
     void create_devePersistirERetornarBeneficio() {
         when(repository.save(any())).thenReturn(origem);
@@ -61,8 +57,6 @@ class BeneficioServiceTest {
         assertNotNull(result);
         verify(repository).save(any());
     }
-
-    // ── transfer ─────────────────────────────────────────────────────────────
 
     @Test
     void transfer_deveSubtrairDaOrigem_e_SomarAoDestino() {

@@ -25,16 +25,12 @@ public class BeneficioController {
         this.service = service;
     }
 
-    // ── Listagem ─────────────────────────────────────────────────────────────
-
     @Operation(summary = "Lista todos os benefícios")
     @GetMapping
     public List<Beneficio> list(
             @Parameter(description = "Filtrar apenas ativos") @RequestParam(required = false) Boolean ativo) {
         return Boolean.TRUE.equals(ativo) ? service.findAtivos() : service.findAll();
     }
-
-    // ── Busca por ID ─────────────────────────────────────────────────────────
 
     @Operation(summary = "Busca um benefício por ID",
                responses = {@ApiResponse(responseCode = "404", description = "Não encontrado")})
@@ -43,15 +39,11 @@ public class BeneficioController {
         return service.findById(id);
     }
 
-    // ── Criação ───────────────────────────────────────────────────────────────
-
     @Operation(summary = "Cria um novo benefício")
     @PostMapping
     public ResponseEntity<Beneficio> create(@Valid @RequestBody Beneficio beneficio) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.create(beneficio));
     }
-
-    // ── Atualização ───────────────────────────────────────────────────────────
 
     @Operation(summary = "Atualiza um benefício existente")
     @PutMapping("/{id}")
@@ -59,16 +51,12 @@ public class BeneficioController {
         return service.update(id, beneficio);
     }
 
-    // ── Exclusão lógica ───────────────────────────────────────────────────────
-
     @Operation(summary = "Desativa (exclusão lógica) um benefício")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deactivate(@PathVariable Long id) {
         service.deactivate(id);
         return ResponseEntity.noContent().build();
     }
-
-    // ── Transferência ─────────────────────────────────────────────────────────
 
     @Operation(summary = "Transfere valor entre dois benefícios",
                description = "Valida saldo, aplica pessimistic locking e executa em transação atômica.",
