@@ -84,7 +84,7 @@ mvn verify
 
 | Método | Rota | Descrição |
 |--------|------|-----------|
-| GET | `/api/v1/beneficios` | Lista todos (aceita `?ativo=true`) |
+| GET | `/api/v1/beneficios` | Lista todos |
 | GET | `/api/v1/beneficios/{id}` | Busca por ID |
 | POST | `/api/v1/beneficios` | Cria novo |
 | PUT | `/api/v1/beneficios/{id}` | Atualiza |
