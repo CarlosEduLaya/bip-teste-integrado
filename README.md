@@ -5,13 +5,6 @@ Solução fullstack para o desafio técnico, cobrindo banco de dados, módulo EJ
 ---
 
 
-## Link de Apresetanção do Projeto
-
-Este vídeo tem como objetivo esclarecer alguns pontos para os gestores. A gravação foi feita de forma simples e didática, com foco em facilitar o entendimento e apoiar na explicação do desafio.
-
-- https://youtu.be/qCIpjTtdzJw
-- https://youtu.be/Ex1epoicgYk
-
 
 ## Estrutura
 
